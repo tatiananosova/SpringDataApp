@@ -1,9 +1,9 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8080/app/products';
+    const contextPath = 'http://localhost:8080/app/api/v1/products';
 
     $scope.saveProduct = function () {
         console.log($scope.NewProduct)
-        $http.post(contextPath + '/add', $scope.NewProduct)
+        $http.post(contextPath, $scope.NewProduct)
             .then(function (resp){
                 $scope.NewProduct = null
                 $scope.fillTable();
@@ -21,7 +21,8 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     $scope.fillTable = function () {
         $http.get(contextPath)
             .then(function (response) {
-            $scope.Patients = response.data;
+                console.log(response);
+                $scope.Products = response.data;
         });
     };
 
