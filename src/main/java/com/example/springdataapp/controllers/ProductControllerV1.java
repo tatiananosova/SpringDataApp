@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
-public class ProductController {
+public class ProductControllerV1 {
     private final ProductRepository productRepository;
 
     @GetMapping
@@ -23,14 +23,24 @@ public class ProductController {
         return productRepository.findById(id).orElseThrow();
     }
 
+    @PostMapping
+    public Product create(@RequestBody Product product) {
+        return productRepository.save(product);
+    }
+
+    @PutMapping
+    public Product update(@RequestBody Product product) {
+        return productRepository.save(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(Long id) {
+        //TODO
+    }
+
     @GetMapping("/{id}/delete")
     public void deleteProductById(@PathVariable Long id) {
         productRepository.deleteById(id);
-    }
-
-    @PostMapping
-    public Product add(@RequestBody Product product) {
-        return productRepository.save(product);
     }
 
     @GetMapping("/search_by_title")
