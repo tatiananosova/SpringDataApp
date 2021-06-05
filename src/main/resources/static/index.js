@@ -14,17 +14,43 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     $scope.deleteProductById = function (id) {
         $http.get(contextPath + '/' + id + '/delete')
             .then(function (resp){
-                $scope.fillTable();
+                $scope.fillTable($scope.ProductsPage.number + 1);
             })
     };
 
-    $scope.fillTable = function () {
-        $http.get(contextPath)
-            .then(function (response) {
-                console.log(response);
-                $scope.Products = response.data;
+    $scope.fillTable = function (pageIndex = 1) {
+        $http({
+            url: contextPath,
+            method: 'GET',
+            params: {
+                'title': $scope.filter ? $scope.filter.title : null,
+                'cost': $scope.filter ? $scope.filter.cost : null,
+                'page-number': pageIndex
+            }
+        }).then(function (response) {
+            $scope.ProductsPage = response.data;
+
+            let minPageIndex = pageIndex - 1;
+            if (minPageIndex < 1) {
+                minPageIndex = 1;
+            }
+
+            let maxPageIndex = pageIndex + 1;
+            if (maxPageIndex > $scope.ProductsPage.totalPages) {
+                maxPageIndex = $scope.ProductsPage.totalPages;
+            }
+
+            $scope.ProductsArray = $scope.generatePagesIndexes(minPageIndex, maxPageIndex);
         });
     };
+
+    $scope.generatePagesIndexes = function(startPage, endPage) {
+        let arr = [];
+        for (let i = startPage; i < endPage + 1; i++) {
+            arr.push(i);
+        }
+        return arr;
+    }
 
     $scope.fillTable();
 });
