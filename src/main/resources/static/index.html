@@ -20,7 +20,7 @@
                 <td>{{p.id}}</td>
                 <td>{{p.title}}</td>
                 <td>{{p.cost}}</td>
-                <td>{{p.category.category}}</td>
+                <td>{{p.category.categoryName}}</td>
                 <td>
                     <button class="btn btn-danger" ng-click="deleteProductById(p.id)">Удалить товар</button>
                 </td>
@@ -55,8 +55,8 @@
         </div>
         <div class="form-group col-md-6">
             <label for="exampleFormControlSelect1">Категория</label>
-            <select class="form-control" id="exampleFormControlSelect1" ng-model="NewProduct.category">
-                <option ng-repeat="x in Categories">{{x.category}}</option>
+            <select class="form-control" id="exampleFormControlSelect1" ng-model="NewProduct.category.categoryName">
+                <option ng-repeat="x in Categories">{{x.categoryName}}</option>
             </select>
         </div>
         <div>

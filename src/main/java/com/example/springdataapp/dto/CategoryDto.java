@@ -6,13 +6,14 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryDto {
-    private String category;
+    private Integer id;
+    private String categoryName;
+    private Set<ProductDto> productSet;
 
-    public static CategoryDto fromCategory(Category category) {
-        return new CategoryDto(category.getCategory());
-    }
 }

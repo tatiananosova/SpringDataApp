@@ -1,6 +1,8 @@
 package com.example.springdataapp.service;
 
+import com.example.springdataapp.model.Category;
 import com.example.springdataapp.model.Product;
+import com.example.springdataapp.repository.CategoryRepository;
 import com.example.springdataapp.repository.ProductRepository;
 import com.example.springdataapp.service.specification.ProductSpecification;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    private final CategoryService categoryService;
 
     public Page<Product> findAll(Map<String, String> params, Integer pageNumber, Integer pageSize) {
         final Specification<Product> specification = ProductSpecification.build(params);
@@ -22,7 +25,11 @@ public class ProductService {
     }
 
     public Product save(Product product) {
-        return productRepository.save(product);
+        Category category = categoryService.getCategoryByName(product.getCategory().getCategoryName());
+        product.setCategory(category);
+        productRepository.save(product);
+
+        return product;
     }
 
     public Product findById(Long id) {
