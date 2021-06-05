@@ -3,6 +3,6 @@ package com.example.springdataapp.dto;
 import lombok.Data;
 
 @Data
-public class ErrorResponse {
+public class ErrorResponseDto {
     private final String message;
 }

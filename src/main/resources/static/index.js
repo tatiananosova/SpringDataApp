@@ -1,5 +1,6 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
     const contextPath = 'http://localhost:8080/app/api/v1/products';
+    const categoriesPath = 'http://localhost:8080/app/api/v1/categories';
 
     $scope.saveProduct = function () {
         console.log($scope.NewProduct)
@@ -44,6 +45,13 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     };
 
+    $scope.getCategories = function () {
+        $http.get(categoriesPath)
+            .then(function (response) {
+                $scope.Categories = response.data;
+            });
+    };
+
     $scope.generatePagesIndexes = function(startPage, endPage) {
         let arr = [];
         for (let i = startPage; i < endPage + 1; i++) {
@@ -53,4 +61,5 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     }
 
     $scope.fillTable();
+    $scope.getCategories();
 });

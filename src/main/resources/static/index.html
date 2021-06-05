@@ -15,11 +15,12 @@
     <div>
         <h1>Список товаров</h1>
         <table class="table table-hove">
-            <tr><th>Id</th><th>Наименование</th><th>Стоимость</th></tr>
+            <tr><th>Id</th><th>Наименование</th><th>Стоимость</th><th>Категория</th></tr>
             <tr ng-repeat="p in ProductsPage.content">
                 <td>{{p.id}}</td>
                 <td>{{p.title}}</td>
                 <td>{{p.cost}}</td>
+                <td>{{p.category.category}}</td>
                 <td>
                     <button class="btn btn-danger" ng-click="deleteProductById(p.id)">Удалить товар</button>
                 </td>
@@ -51,6 +52,12 @@
         <div class="form-group col-md-6">
             <label >Стоимость</label>
             <input class="form-control" type="number" ng-model="NewProduct.cost">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="exampleFormControlSelect1">Категория</label>
+            <select class="form-control" id="exampleFormControlSelect1" ng-model="NewProduct.category">
+                <option ng-repeat="x in Categories">{{x.category}}</option>
+            </select>
         </div>
         <div>
             <button class="btn btn-success" type="submit">Сохранить</button>
