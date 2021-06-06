@@ -1,27 +1,47 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8080/app/api/v1/products';
-    const categoriesPath = 'http://localhost:8080/app/api/v1/categories';
+    const contextPath = 'http://localhost:8080/app/api/v1';
 
     $scope.saveProduct = function () {
         console.log($scope.NewProduct)
-        $http.post(contextPath, $scope.NewProduct)
+        $http.post(contextPath + '/products', $scope.NewProduct)
             .then(function (resp){
                 $scope.NewProduct = null
                 $scope.fillTable();
             })
-
     };
 
-    $scope.deleteProductById = function (id) {
-        $http.get(contextPath + '/' + id + '/delete')
+    $scope.deleteProductById = function(id) {
+        $http.get(contextPath + '/products/' + id + '/delete')
             .then(function (resp){
                 $scope.fillTable($scope.ProductsPage.number + 1);
             })
     };
 
-    $scope.fillTable = function (pageIndex = 1) {
+    $scope.addProductToCart = function(id) {
+        $http.put(contextPath + '/cart/' + id)
+            .then(function (resp){
+                $scope.fillCart();
+            })
+    }
+
+    $scope.fillCart = function () {
+        $http.get(contextPath + '/cart/')
+            .then(function (response) {
+                $scope.sumCart();
+                $scope.ProductsInCart = response.data;
+            })
+    }
+
+    $scope.sumCart = function () {
+        $http.get(contextPath + '/cart/cost')
+            .then(function (response) {
+                $scope.sum = response.data;
+            })
+    }
+
+    $scope.fillTable = function(pageIndex = 1) {
         $http({
-            url: contextPath,
+            url: contextPath + '/products',
             method: 'GET',
             params: {
                 'title': $scope.filter ? $scope.filter.title : null,
@@ -46,7 +66,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     };
 
     $scope.getCategories = function () {
-        $http.get(categoriesPath)
+        $http.get(contextPath + '/categories')
             .then(function (response) {
                 $scope.Categories = response.data;
             });
@@ -62,4 +82,5 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
 
     $scope.fillTable();
     $scope.getCategories();
+    $scope.fillCart();
 });

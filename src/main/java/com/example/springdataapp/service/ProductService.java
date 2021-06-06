@@ -2,7 +2,6 @@ package com.example.springdataapp.service;
 
 import com.example.springdataapp.model.Category;
 import com.example.springdataapp.model.Product;
-import com.example.springdataapp.repository.CategoryRepository;
 import com.example.springdataapp.repository.ProductRepository;
 import com.example.springdataapp.service.specification.ProductSpecification;
 import lombok.RequiredArgsConstructor;

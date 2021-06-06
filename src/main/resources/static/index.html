@@ -24,6 +24,9 @@
                 <td>
                     <button class="btn btn-danger" ng-click="deleteProductById(p.id)">Удалить товар</button>
                 </td>
+                <td>
+                    <button class="btn btn-group" ng-click="addProductToCart(p.id)">Добавить в корзину</button>
+                </td>
             </tr>
         </table>
     </div>
@@ -43,6 +46,19 @@
             </li>
         </ul>
     </nav>
+    <div>
+        <h1>Корзина</h1>
+        <table class="table table-hove">
+            <tr ng-repeat="с in ProductsInCart">
+                <td>{{c.title}}</td>
+                <td>{{c.cost}}</td>
+            </tr>
+            <tr>
+               <td>Итого</td>
+                <td>{{sum}}</td>
+            </tr>
+        </table>
+    </div>
     <h3>Добавление Товара</h3>
     <form novalidate ng-submit="saveProduct()">
         <div class="form-group col-md-6">
