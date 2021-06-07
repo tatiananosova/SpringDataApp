@@ -47,17 +47,15 @@
         </ul>
     </nav>
     <div>
-        <h1>Корзина</h1>
-        <table class="table table-hove">
-            <tr ng-repeat="с in ProductsInCart">
-                <td>{{c.title}}</td>
-                <td>{{c.cost}}</td>
-            </tr>
-            <tr>
-               <td>Итого</td>
-                <td>{{sum}}</td>
-            </tr>
-        </table>
+        <h1>В Корзине</h1>
+        <ul class="example-animate-container">
+            <li class="animate-repeat" ng-repeat="p in ProductsInCart">
+                {{p.title}} стоимость {{::p.cost}} руб.
+            </li>
+        </ul>
+        <div>
+            <strong>Итого: {{sum}} руб.</strong>
+        </div>
     </div>
     <h3>Добавление Товара</h3>
     <form novalidate ng-submit="saveProduct()">
