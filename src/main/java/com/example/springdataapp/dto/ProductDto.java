@@ -2,6 +2,7 @@ package com.example.springdataapp.dto;
 
 import lombok.Data;
 
+//FIXME use DTO
 @Data
 public class ProductDto {
 

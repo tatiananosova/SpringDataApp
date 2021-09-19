@@ -18,3 +18,9 @@ insert into products (title, cost, category_id) values
 ('Zucchini',2, 2),
 ('Pumpkin',3, 2);
 
+create table users (id bigserial primary key not null, username varchar not null, password varchar(80) not null, email varchar not null);
+insert into users (username, password, email)
+values
+('user', '$2y$12$uDTMf9F2Djwflqi5U8fwtenibQqqKRcIYqlhT8BSWqXwANBffFQQ.', 'user@gmail.com'),
+('user1', '$2y$12$uDTMf9F2Djwflqi5U8fwtenibQqqKRcIYqlhT8BSWqXwANBffFQQ.', 'user1@gmail.com'),
+('user2', '$2y$12$uDTMf9F2Djwflqi5U8fwtenibQqqKRcIYqlhT8BSWqXwANBffFQQ.', 'user2@gmail.com');
