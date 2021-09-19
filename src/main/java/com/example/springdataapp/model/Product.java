@@ -1,5 +1,8 @@
 package com.example.springdataapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +22,10 @@ public class Product {
     private String title;
 
     @Column(name = "cost")
-    private int cost;
+    private Integer cost;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 }
 
